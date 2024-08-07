@@ -14,6 +14,8 @@ Among other data, manufacturers and On-Demand Manufacturing (ODM) platforms can 
 
 The **Asset Management Service's GraphQL API** is documented here: :blue_book: [AMS API](https://www.smartfactoryweb.de/assetmanagementservice/schema-doc/)
 
+Sample requests as Postman collection: :blue_book: [Collection](https://www.smartfactoryweb.de/assetmanagementservice/requestcollection/AssetManagementService.postman_collection.json)
+
 Classification of AMS based on the MIS architecture.
 
 <img width="705" alt="AMS" src="https://github.com/user-attachments/assets/a1b31105-7950-4cd9-acca-e0ab68a55612">
