@@ -18,7 +18,7 @@ Sample requests as Postman collection: :blue_book: [Collection](https://www.smar
 
 Classification of AMS based on the MIS architecture.
 
-<img width="705" alt="AMS" src="https://github.com/user-attachments/assets/a1b31105-7950-4cd9-acca-e0ab68a55612">
+![AMS](/../main/docs/src/images/AMS.PNG)
 
 The following use cases can be performed with the AMS.
 
