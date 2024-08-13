@@ -18,7 +18,7 @@ Sample requests as Postman collection: :blue_book: [Collection](https://www.smar
 
 Classification of AMS based on the MIS architecture.
 
-<img width="705" alt="AMS" src="https://github.com/user-attachments/assets/a1b31105-7950-4cd9-acca-e0ab68a55612">
+![AMS](/../main/docs/src/images/AMS.PNG)
 
 The following use cases can be performed with the AMS.
 
@@ -47,3 +47,20 @@ The following use cases can be performed with the AMS.
 | **Asset Management and Refinement Application (AMARA)**  | Automatically derives manufacturing capabilities from machine specifications with Large Language Models (LLM)  | [MIS-AMARA](https://github.com/FraunhoferIOSB/MIS-AMARA) |
 | **Asset Management Service (AMS)**  | Interface to manage asset information like enterprise, factories, manufacturing capabilities, etc. within the knowledge base |[MIS-AMS](https://github.com/FraunhoferIOSB/MIS-AMS)  |
 | **Search Engine (SE)**  | Provision of manufacturer information such as production capabilities for a given process description  | [MIS-SE](https://github.com/FraunhoferIOSB/MIS-SE)  |
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions are **greatly appreciated**.
+You can find our contribution guidelines [here](CONTRIBUTING.md)
+
+## Contact
+
+info-disc-ecosystem@iosb.fraunhofer.de
+
+## License
+
+Distributed under the Apache 2.0 License. See `LICENSE` for more information.
+
+Copyright (C) 2022 Fraunhofer Institut IOSB, Fraunhoferstr. 1, D 76131 Karlsruhe, Germany.
+
+You should have received a copy of the Apache 2.0 License along with this program. If not, see https://www.apache.org/licenses/LICENSE-2.0.html.
