@@ -48,6 +48,29 @@ The following use cases can be performed with the AMS.
 | **Asset Management Service (AMS)**  | Interface to manage asset information like enterprise, factories, manufacturing capabilities, etc. within the knowledge base |[MIS-AMS](https://github.com/FraunhoferIOSB/MIS-AMS)  |
 | **Search Engine (SE)**  | Provision of manufacturer information such as production capabilities for a given process description  | [MIS-SE](https://github.com/FraunhoferIOSB/MIS-SE)  |
 
+## How to start
+```
+git clone https://gitlab.cc-asp.fraunhofer.de/iosb/ilt/smartfactoryweb/asset-management-service.git
+cd asset-management-service/
+mvn clean install -DskipTests 
+mvn spring-boot:run
+```
+Open in browser `http://localhost:8080/graphiql` and run a graphql query like 
+```
+{
+    shows {
+        title
+        releaseYear
+    }
+}
+```
+Run tests: mvn test
+
+### How to (re)build the API doc
+First [install graphdoc](https://2fd.github.io/graphdoc/) e.g. using npm in Ubuntu (WSL).
+
+Afterwards run `graphdoc -s ./src/main/resources/schema/schema.graphql -o ./schema/schema-doc --force`
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions are **greatly appreciated**.
