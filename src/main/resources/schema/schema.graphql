@@ -1,0 +1,1518 @@
+#Asset Management Service (AMS) GraphQL Schema v0.2.2
+#Note: Capability and product class hierarchies are not set via bulk import.
+
+# A location containing coordinates and an address
+type Location {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID!
+	# Latitude of the location
+	latitude: String
+	# Longitude of the location
+	longitude: String
+	# Street name of the location
+	street: String
+	# Street/house number of the location
+	streetNumber: String
+	# Zipcode of the location
+	zip: String
+	# City of the location
+	city: String
+	# Country of the location
+	country: String
+}
+
+# Fields of a location which can be passed to mutations.
+input LocationInput {
+	# Unique knowledge base identifier of the location
+	id: ID
+	# Latitude of the location
+	latitude: String
+	# Longitude of the location
+	longitude: String
+	# Street name of the location
+	street: String
+	# Street/house number of the location
+	streetNumber: String
+	# Zipcode of the location
+	zip: String
+	# City of the location
+	city: String
+	# Country of the location
+	country: String
+}
+
+# Fields of a location which can be passed to queries to filter results.
+input LocationFilter {
+	# Unique knowledge base identifier of the location
+	id: ID
+	# Latitude of the location
+	latitude: String
+	# Longitude of the location
+	longitude: String
+	# Street name of the location
+	street: String
+	# Street/house number of the location
+	streetNumber: String
+	# Zipcode of the location
+	zip: String
+	# City of the location
+	city: String
+	# Country of the location
+	country: String
+}
+
+# An enterprise or company which is a supplier in a supply chain, provider of production capabilities, etc.
+type Enterprise {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Label, e.g. name, of the enterprise.
+	label: String!
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	labelLanguageCode: String!
+	# Description of the enterprise
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	descriptionLanguageCode: String
+	# Location of the enterprise
+	location: Location
+	# Factories of the enterprise
+	factories: [Factory]
+	# Subsidiary enterprises of the enterprise
+	subsidiaryEnterprises: [Enterprise]
+	# Arbitrary properties of the enterprise
+	properties: [Property]
+	# Products assigned directly to the enterprise or to a factory of the enterprise or as an output product of a process of the enterprise
+	products: [Product]
+	# Processes assigned to a factory of the enterprise or as a realization of a capability provided by a
+	# production resource of this enterprise
+	processes: [Process]
+	# Production resources assigned to a factory of the enterprise
+	# production resource of this enterprise
+	productionResources: [ProductionResource]
+	# The supply chains of the enterprise's products
+	supplyChains: [SupplyChain]
+	# Certificates of the enterprise
+	certificates: [Property]
+	# Logo of the enterprise
+	logo: String
+}
+
+# Fields of an enterprise which can be passed to mutations.
+input EnterpriseInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Label, e.g. name, of the enterprise.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	labelLanguageCode: String
+	# Description of the enterprise
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	descriptionLanguageCode: String
+	# Location of the enterprise
+	location: LocationInput
+	
+	# Factories of the enterprise
+	factories: [FactoryInput]
+	# Subsidiary enterprises of the enterprise
+	subsidiaryEnterprises: [EnterpriseInput]
+	# Arbitrary properties of the enterprise
+	properties: [PropertyInput]
+	# Products assigned directly to the enterprise or to a factory of the enterprise or as an output product of a process of the enterprise
+	products: [ProductInput]
+	# Certificates of the enterprise
+	certificates: [PropertyInput]
+	# Logo of the enterprise
+	logo: String
+}
+
+# Fields of a enterprise which can be passed to queries as filters.
+input EnterpriseFilter {
+	# Unique knowledge base identifier
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+}
+
+# A factory which is part of an enterprise and contains production resources.
+type Factory {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Label, e.g. name, of the factory.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	labelLanguageCode: String
+	# Description of the factory
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	descriptionLanguageCode: String
+	# Location of the factory
+	location: Location
+	# Arbitrary properties of the factory
+	properties: [Property]
+	# Products assigned to the factory or as an output product of a process of the factory enterprise
+	products: [Product]
+	# Machines located in the factory
+	machines: [Machine]
+	# Human resources available in the factory (especially the ones with special expertise)
+	humanResources: [HumanResource]
+	# Enterprise the factory belongs to
+	enterprise: Enterprise!
+	# Processes assigned to the factory or as realization of a capability a production resource of the factory provides
+	processes: [Process]
+	# Certificates of the factory
+	certificates: [Property]
+}
+
+# Fields of a factory which can be passed to mutations.
+input FactoryInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Label, e.g. name, of the factory.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	labelLanguageCode: String
+	# Description of the factory
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	descriptionLanguageCode: String
+	# Location of the factory
+	location: LocationInput
+
+	# Arbitrary properties of the factory
+	properties: [PropertyInput]
+	# Products assigned to the factory or as an output product of a process of the factory enterprise
+	products: [ProductInput]
+	# Machines located in the factory
+	machines: [MachineInput]
+	# Human resources available in the factory (especially the ones with special expertise)
+	humanResources: [HumanResourceInput]
+	# Processes assigned to the factory or as realization of a capability a production resource of the factory provides
+	processes: [ProcessInput]
+	# Certificates of the factory
+	certificates: [PropertyInput]
+}
+
+# Fields of a factory which can be passed to queries as filters.
+input FactoryFilter {
+	# Unique knowledge base identifier
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+}
+
+# A digital product passport reference.
+type ProductPassport {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Unique product identifier as required by regulation https://environment.ec.europa.eu/publications/proposal-ecodesign-sustainable-products-regulation_en
+	identifier: ID!
+	# Properties of the product passport and product passport registry necessary to get the data
+	properties: [Property]
+}
+
+# Fields of a product passport which can be passed to mutations.
+input ProductPassportInput {
+	# Unique knowledge base identifier
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Unique product identifier as required by regulation https://environment.ec.europa.eu/publications/proposal-ecodesign-sustainable-products-regulation_en
+	identifier: ID
+	# Properties of the product passport and product passport registry necessary to get the data
+	properties: [PropertyInput]
+}
+
+# Fields of a product passport which can be passed to queries as filters.
+input ProductPassportFilter {
+	# Unique knowledge base identifier
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Unique product identifier as required by regulation https://environment.ec.europa.eu/publications/proposal-ecodesign-sustainable-products-regulation_en
+	identifier: ID
+}
+
+# An end product (can also be a material) or a product used to produce another product. It includes information about its supply chain and references its product passport.
+type Product {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Label, e.g. name, of the product.
+	label: String!
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	labelLanguageCode: String!
+	# Description of the product
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	descriptionLanguageCode: String
+	# A list of sub products the product consists of
+	billOfMaterials: [ProductApplication]
+	# Arbitrary properties of the product
+	properties: [Property]
+	# Product class the product belongs to
+	productClasses: [ProductClass]
+	# References to semantics describing the product
+	semanticReferences:  [SemanticReference]
+	# Factories offering the product. Directly assigned or via a process outputting the product and provided by a
+	# production resource of the respective factory
+	factories: [Factory]
+	# Subsidiary companies offering the product. Assigned directly, via factory or process.
+	enterprises: [Enterprise]
+	# All supply chains associated with this product
+	supplyChains: [SupplyChain]
+	# product passport following https://environment.ec.europa.eu/publications/proposal-ecodesign-sustainable-products-regulation_en
+	productPassport: ProductPassport
+}
+
+# Fields of a product which can be passed to mutations.
+input ProductInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Label, e.g. name, of the product.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	labelLanguageCode: String
+	# Description of the product
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	descriptionLanguageCode: String
+	# A list of sub products the product consists of
+	billOfMaterials: [ProductApplicationInput]
+	# product passport following https://environment.ec.europa.eu/publications/proposal-ecodesign-sustainable-products-regulation_en
+	productPassport: ProductPassportInput
+	# All supply chains associated with this product
+	supplyChains: [SupplyChainInput]
+	# Arbitrary properties of the product
+	properties: [PropertyInput]
+	# References to semantics describing the product
+	semanticReferences:  [SemanticReferenceInput]
+}
+
+# Fields of a product which can be passed to queries as filters.
+input ProductFilter {
+	# Unique knowledge base identifier
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+}
+
+# A container for product usage metadata, like quantity. This is important to model input and output products of processes.
+type ProductApplication {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Product the application is defined for
+	product: Product!
+	# A property describing the quantity of the product used in the product application, e.g. as input for a process
+	quantity: Property
+	# Properties belonging to the product application (not properties of the product independent of its application)
+	properties: [Property]
+}
+
+# Fields of a product application (Product metadata container) which can be passed to mutations.
+input ProductApplicationInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Product the application is defined for
+	product: ProductInput
+	# A property describing the quantity of the product used in the product application, e.g. as input for a process
+	quantity: PropertyInput
+	# Properties belonging to the product application (not properties of the product independent of its application)
+	properties: [PropertyInput]
+}
+
+# Fields of a product application (Product metadata container) which can be passed to queries as filters.
+input ProductApplicationFilter {
+	# Unique knowledge base identifier
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Id of the product the application is defined for
+	productId: ID
+	#ID of a process having this container as in- or output
+	processId: ID
+	#ID of a product containing this container's product within its bill of materials
+	parentProductId: ID
+}
+
+# A production capability. The capabilities are ordered hierarchically. It is imporant to provide semantic references or at least descriptions of the capability. Otherwise it might not be found by the search engine.
+type Capability {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Label, e.g. name, of the capability.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	labelLanguageCode: String
+	# Description of the capability
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	descriptionLanguageCode: String
+	# Arbitrary properties of the capability
+	properties: [Property]
+	# Processes realizing the capability
+	processes: [Process]
+	# Capabilities specializing the capability
+	childCapabilities: [Capability]
+	# Capabilities generalizing the capability
+	parentCapabilities: [Capability]
+	# Production resources providing the capability
+	productionResources: [ProductionResource]
+	# References to semantics describing the capability
+	semanticReferences:  [SemanticReference]
+}
+
+# Fields of a capability which can be passed to mutations.
+input CapabilityInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Label, e.g. name, of the capability.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	labelLanguageCode: String
+	# Description of the capability
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	descriptionLanguageCode: String
+	# References to semantics describing the capability
+	semanticReferences:  [SemanticReferenceInput]
+	# Arbitrary properties of the capability
+	properties: [PropertyInput]
+	# Capabilities specializing the capability
+	childCapabilities: [CapabilityInput]
+	# Capabilities generalizing the capability
+	parentCapabilities: [CapabilityInput]
+
+}
+
+# Fields of a capability which can be passed to queries as filters.
+input CapabilityFilter {
+	# Unique knowledge base identifier
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application
+	sourceId: ID
+	# Id of a reference to a semantic describing the capability
+	semanticReferenceId:  ID
+}
+
+# A property is a slice of information about an entity or capability. It is recommended to define at least one semantic reference for the property which is a BAMM model. This way applications can dynamically select the correct data and form type in interfaces to create, read or update the property.
+type Property {
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID	
+	# Label of the property.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String
+	# Description of the property.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# References to semantics describing the property. A BAMM model reference should be one of the references.
+	semanticReferences: [SemanticReference]
+	# The actual value of the property, if one exists.
+	value: String
+}
+
+# Fields of a property which can be passed to mutations.
+input PropertyInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Label of the property.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String
+	# Description of the property.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# References to semantics describing the property.
+	semanticReferences: [SemanticReferenceInput]
+	# The actual value of the property, if one exists.
+	value: String
+}
+
+# Fields of a property which can be passed to queries as filters.
+input PropertyFilter {
+	# Unique knowledge base identifier.
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Id of a reference to a semantic describing the property.
+	semanticReferenceId: ID
+}
+
+# A process description which schould be linked to capabilities, input/output products and production resources. Input/output products do not have to be added if they are added to the sub processes and the sub processes are ordered via their input/output products.
+type Process {
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Description of the process.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# Arbitrary properties of the process.
+	properties: [Property]
+	# Process using the process as sub process.
+	parentProcesses: [Process]
+	# Sub process of the process.
+	childProcesses: [Process]
+	# Capabilities realized by the process.
+	realizedCapabilities: [Capability]
+	# Capabilities required by the process.
+	requiredCapabilities: [Capability]
+	# Preliminary products as input products of the process. This shows all product applications added to the process using type PRELIMINARY_PRODUCT.
+	preliminaryProducts: [ProductApplication]
+	# Raw materials as input products of the process. This shows all product applications added to the process using type RAW_MATERIAL.
+	rawMaterials: [ProductApplication]
+	# Auxiliary materials as input products of the process. This shows all product applications added to the process using type AUXILIARY_MATERIAL.
+	auxiliaryMaterials: [ProductApplication]
+	# Operating materials as input products of the process. This shows all product applications added to the process using type OPERATING_MATERIAL.
+	operatingMaterials: [ProductApplication]
+	# End products as output products of the process. This shows all product applications added to the process using type END_PRODUCT.
+	endProducts: [ProductApplication]
+	# By products as output products of the process. This shows all product applications added to the process using type BY_PRODUCT.
+	byProducts: [ProductApplication]
+	# Waste as output products of the process. This shows all product applications added to the process using type WASTE_PRODUCT.
+	wasteProducts: [ProductApplication]
+	# Input products of the process. This shows all product applications added to the process using any InputProductType.
+	inputProducts: [ProductApplication]
+	# Output products of the process. This shows all product applications added to the process using any OutputProductType.
+	outputProducts: [ProductApplication]
+	# Production resource used during the conduction of the process.
+	usedProductionResources: [ProductionResource]
+	# Production resource completely covering the process (no other production resource needed to conduct the process).
+	providingProductionResources: [ProductionResource]
+}
+
+# ENUM for input product types of a process.
+enum InputProductType {
+	PRELIMINARY_PRODUCT
+	RAW_MATERIAL
+	AUXILIARY_MATERIAL
+	OPERATING_MATERIAL
+}
+
+# ENUM for output product types of a process.
+enum OutputProductType {
+	END_PRODUCT
+	BY_PRODUCT
+	WASTE_PRODUCT
+}
+
+# Fields of a process which can be passed to mutations.
+input ProcessInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Description of the process.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# Arbitrary properties of the process.
+	properties: [PropertyInput]
+	# Process using the process as sub process.
+	parentProcesses: [ProcessInput]
+	# Sub process of the process.
+	childProcesses: [ProcessInput]
+	# Capabilities realized by the process.
+	realizedCapabilities: [CapabilityInput]
+	# Capabilities required by the process.
+	requiredCapabilities: [CapabilityInput]
+	# Preliminary products as input products of the process. This shows all product applications added to the process using type PRELIMINARY_PRODUCT.
+	preliminaryProducts: [ProductApplicationInput]
+	# Raw materials as input products of the process. This shows all product applications added to the process using type RAW_MATERIAL.
+	rawMaterials: [ProductApplicationInput]
+	# Auxiliary materials as input products of the process. This shows all product applications added to the process using type AUXILIARY_MATERIAL.
+	auxiliaryMaterials: [ProductApplicationInput]
+	# Operating materials as input products of the process. This shows all product applications added to the process using type OPERATING_MATERIAL.
+	operatingMaterials: [ProductApplicationInput]
+	# End products as output products of the process. This shows all product applications added to the process using type END_PRODUCT.
+	endProducts: [ProductApplicationInput]
+	# By products as output products of the process. This shows all product applications added to the process using type BY_PRODUCT.
+	byProducts: [ProductApplicationInput]
+	# Waste as output products of the process. This shows all product applications added to the process using type WASTE_PRODUCT.
+	wasteProducts: [ProductApplicationInput]
+	# Input products of the process. This shows all product applications added to the process using any InputProductType.
+	inputProducts: [ProductApplicationInput]
+	# Output products of the process. This shows all product applications added to the process using any OutputProductType.
+	outputProducts: [ProductApplicationInput]
+	# Machine used during the conduction of the process.
+	usedMachines: [MachineInput]
+	# Production resource used during the conduction of the process.
+	usedHumanResources: [HumanResourceInput]
+	# Machine completely covering the process (no other production resource needed to conduct the process).
+	providingMachines: [MachineInput]
+	# Human resource completely covering the process (no other production resource needed to conduct the process).
+	providingHumanResources: [HumanResourceInput]
+}
+
+# Fields of a process which can be passed to queries as filters.
+input ProcessFilter {
+	# Unique knowledge base identifier.
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+}
+
+# A supply chain container, consisting of supply chain elements to represent the whole supply chain.
+type SupplyChain {
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Description containing information about the supply chain.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# The direct suppliers as first level elements of the supply chain.
+	suppliers : [SupplyChainElement!]!
+}
+
+# Fields of a supply chain which can be passed to mutations.
+input SupplyChainInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Description of the supply chain.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# The direct suppliers as first level elements of the supply chain.
+	suppliers : [SupplyChainElementInput]
+}
+
+# Fields of a supply chain which can be passed to queries as filters.
+input SupplyChainFilter {
+	# Unique knowledge base identifier.
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+}
+
+# Supplier within a certain supply chain. Multiple factories of one company have to be divided into multiple supply chain elements.
+type SupplyChainElement {
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Description containing information about the supplier.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	#List of products (as product applications) the supplier provides within this supply chain element.
+	products: [ProductApplication]
+	# Supplier company.
+	enterprise : Enterprise
+	# Supplier factory involved.
+	factory: Factory!
+	# Tier 1 suppliers of the supply chain element's enterprise.
+	suppliers : [SupplyChainElement]
+}
+
+
+# Fields of a supply chain element which can be passed to mutations.
+input SupplyChainElementInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Description containing information about the supplier.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# Supplier company.
+	enterprise : EnterpriseInput
+	factory: FactoryInput
+	# List of products (as product applications) the supplier provides within this supply chain element.
+	products: [ProductApplicationInput]
+	# Tier 1 suppliers of the supply chain element's enterprise.
+	suppliers : [SupplyChainElementInput]
+}
+
+# Fields of a supply chain element which can be passed to queries as filters.
+input SupplyChainElementFilter {
+	# Unique knowledge base identifier.
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+}
+
+
+# Abstract production resource definition. It is specialized by Machine and HumanResource.
+interface ProductionResource {
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Label, e.g. name, of the production resource.
+	label: String!
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String!
+	# Description of the production resource.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# Processes added as realization of a capability the production resource provides.
+	providedProcesses: [Process]
+	# Processes using the production resource.
+	usingProcesses: [Process]
+	# Capabilities the production resource provides.
+	providedCapabilities: [Capability]
+}
+
+# A machine of a factory as a production resource which should be linked to processes and capabilities.
+type Machine implements ProductionResource {
+	#-------ProductionResource fields------
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Label naming the machine, e.g. a machine identifier.
+	label: String!
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String!
+	# Description of the machine.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# Processes added as realization of a capability the production resource provides.
+	providedProcesses: [Process]
+	# Processes using the production resource.
+	usingProcesses: [Process]
+	# Capabilities the production resource provides.
+	providedCapabilities: [Capability]
+	#--------------------------------------
+	# Arbitrary machine properties like dimensions or standardized identifiers.
+	machineProperties: [Property]
+}
+
+# Fields of a machine which can be passed to mutations.
+input MachineInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Label naming the machine, e.g. a machine identifier.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String
+	# Description of the machine.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# Processes added as realization of a capability the production resource provides.
+	providedProcesses: [ProcessInput]
+	# Processes using the production resource.
+	usingProcesses: [ProcessInput]
+	# Capabilities the production resource provides.
+	providedCapabilities: [CapabilityInput]
+	#--------------------------------------
+	# Arbitrary machine properties like dimensions or standardized identifiers.
+	machineProperties: [PropertyInput]
+}
+
+# Fields of a machine which can be passed to queries as filters.
+input MachineFilter {
+	# Unique knowledge base identifier.
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+}
+
+# An anonymous human resource as production resource to represent certain expertise and certification. Please do not add personal information!
+type HumanResource implements ProductionResource {
+	#-------ProductionResource fields------
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the human resource in an application.
+	sourceId: ID
+	# Label naming the human resource, e.g. a human resource identifier.
+	label: String!
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String!
+	# Description of the human resource.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# Processes added as realization of a capability the production resource provides.
+	providedProcesses: [Process]
+	# Processes using the production resource.
+	usingProcesses: [Process]
+	# Capabilities the production resource provides.
+	providedCapabilities: [Capability]
+	#--------------------------------------
+	# Certificates the human resource holds.
+	certificates: [Property]
+	# Arbitrary human properties.
+	properties: [Property]
+}
+
+# Fields of a human resource which can be passed to mutations.
+input HumanResourceInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the human resource in an application.
+	sourceId: ID
+	# Label naming the human resource, e.g. a human resource identifier.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String
+	# Description of the human resource.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# Certificates the human resource holds.
+	certificates: [PropertyInput]
+	# Processes added as realization of a capability the production resource provides.
+	providedProcesses: [ProcessInput]
+	# Processes using the production resource.
+	usingProcesses: [ProcessInput]
+	# Capabilities the production resource provides.
+	providedCapabilities: [CapabilityInput]
+	# Arbitrary human properties.
+	properties: [PropertyInput]
+}
+
+# Fields of a human resource which can be passed to queries as filters.
+input HumanResourceFilter {
+	# Unique knowledge base identifier.
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the human resource in an application.
+	sourceId: ID
+	# Ids of the certificates the human resource holds.
+	certificateIds: [ID]
+	# Arbitrary human properties.
+	properties: [PropertyFilter]
+}
+
+# A product type or class which describes the cathegory of a product.
+type ProductClass {
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Label, e.g. name, of the product class/type.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String
+	# Description of the product class/type.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# References to semantics describing the product class.
+	semanticReferences: [SemanticReference]
+	# Parent product classes/types, resp. parent product categories.
+	parentClasses: [ProductClass]
+	# Child product classes/types, resp. child product categories.
+	childClasses: [ProductClass]
+	# Products within the product class.
+	products: [Product]
+}
+# Fields of a product class which can be passed to mutations.
+input ProductClassInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Label, e.g. name, of the product class/type.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String
+	# Description of the product class/type.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+	# References to semantics describing the product class.
+	semanticReferences: [SemanticReferenceInput]
+}
+
+# Fields of a product class which can be passed to queries as filters.
+input ProductClassFilter {
+	# Unique knowledge base identifier.
+	id: ID
+	# Arbitrary id defined by the user, e.g. to identify the object in an application.
+	sourceId: ID
+	# Ids of a reference to a semantic describing the product class.
+	semanticReferenceId: ID
+}
+
+# A reference to a concrete semantic, like to a concrete term in a taxonomy like eClass.
+type SemanticReference {
+	# Unique knowledge base identifier (automatically generated).
+	id: ID!
+	# Uri used to reference the semantic.
+	sourceUri: String!
+	# Label, e.g. semantic identifier, of the semantic or term referenced.
+	label: String
+	# Language code of the label.
+	labelLanguageCode: String
+	# Original description of external semantic.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+}
+
+# Fields of a semantic reference which can be passed to mutations.
+input SemanticReferenceInput {
+	# Unique knowledge base identifier (automatically generated)
+	id: ID
+	# Uri used to reference the semantic.
+	sourceUri: String
+	# Label, e.g. semantic identifier, of the semantic or term referenced.
+	label: String
+	# Language code of the label following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	labelLanguageCode: String
+	# Original description of external semantic.
+	description: String
+	# Language code of the description following xml:lang (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+	descriptionLanguageCode: String
+}
+
+# Fields of a semantic reference which can be passed to queries as filters.
+input SemanticReferenceFilter {
+	# Unique knowledge base identifier.
+	id: ID
+	# Uri used to reference the semantic.
+	sourceUri: String
+}
+
+type Query {
+	# -------Enterprise Query-----------
+	# Returns enterprises managed by the user's group, optionally further filtered
+	enterprise(
+		# cf. EnterpriseFilter
+		filter: EnterpriseFilter
+	): [Enterprise]!
+	
+	# -------Factory Query-----------
+	# Returns factories managed by the user's group, optionally further filtered
+	factory(
+		# cf. FactoryFilter
+		filter: FactoryFilter
+	): [Factory]!
+	
+	# -------SupplyChain-----------
+	# Returns supply chains managed by the user's group, optionally further filtered
+	supplyChain(
+		# cf. SupplyChainFilter
+		filter: SupplyChainFilter
+	): [SupplyChain]!
+	
+	# -------SupplyChainElement-----------
+	# Returns supply chain elements managed by the user's group, optionally further filtered
+	supplyChainElement(
+		# cf. SupplyChainElementFilter
+		filter: SupplyChainElementFilter
+	): [SupplyChainElement]!
+	
+	# -------Property-----------
+	# Returns properties managed by the user's group, optionally further filtered
+	property(
+		# cf. PropertyFilter
+		filter: PropertyFilter
+	): [Property]!
+	
+	# -------Product-----------
+	# Returns products managed by the user's group, optionally further filtered
+	product(
+		# cf. ProductFilter
+		filter: ProductFilter
+	): [Product]!
+	
+	# -------Machine-----------
+	# Returns machines managed by the user's group, optionally further filtered
+	machine(
+		# cf. MachineFilter
+		filter: MachineFilter
+	): [Machine]!
+	
+	# -------HumanResource-----------
+	# Returns human resources managed by the user's group, optionally further filtered
+	humanResource(
+		# cf. HumanResourceFilter
+		filter: HumanResourceFilter
+	): [HumanResource]!
+	
+	# -------ProductClass-----------
+	# Returns product classes managed by the user's group, optionally further filtered
+	productClass(
+		# cf. ProductClassFilter
+		filter: ProductClassFilter
+	): [ProductClass]!
+	
+	# Returns product classes, optionally further filtered. Note that this query does not distinguish between product classes managed by the user's group or those which are not.
+	getAllProductClasses(
+		# cf. ProductClassFilter
+		filter: ProductClassFilter
+	): [ProductClass]!
+	
+	# -------Capability-----------
+	# Returns capabilities managed by the user's group, optionally further filtered
+	capability(
+		# cf. CapabilityFilter
+		filter: CapabilityFilter
+	): [Capability]!
+	
+	# Returns capabilities, optionally further filtered. Note that this query does not distinguish between capabilities managed by the user's group or those which are not.
+	getAllCapabilities(
+		# cf. CapabilityFilter
+		filter: CapabilityFilter
+	): [Capability]!
+	
+	# -------Process-----------
+	# Returns processes managed by the user's group, optionally further filtered
+	process(
+		# cf. ProcessFilter
+		filter: ProcessFilter
+	): [Process]!
+	
+	# -------SemanticReference-----------
+	# Returns semantic references managed by the user's group, optionally further filtered
+	semanticReference(
+		# cf. SemanticReferenceFilter
+		filter: SemanticReferenceFilter
+	): [SemanticReference]!
+	
+	# Returns semantic references, optionally further filtered. Note that this query does not distinguish between semantic references managed by the user's group or those which are not.
+	getAllSemanticReferences(
+		# cf. SemanticReferenceFilter
+		filter: SemanticReferenceFilter
+	): [SemanticReference]!
+	
+	# -------ProductApplication-----------
+	# Returns product applications (product metadata) managed by the user's group, optionally further filtered
+	productApplication(
+		# cf. ProductApplicationFilter
+		filter: ProductApplicationFilter
+	): [ProductApplication]!
+
+	# -------ProductPassport-----------
+	productPassport(
+		# cf. ProductPassportFilter
+		filter: ProductPassportFilter
+	): [ProductPassport]!
+
+	# -------Location-----------
+	location(
+		# cf. LocationFilter
+		filter: LocationFilter
+	): [Location]!
+}
+
+type Mutation {
+	# -------Enterprise-----------
+	# Creates a new enterprise
+	createEnterprise(enterprise: EnterpriseInput!) : EnterpriseResponse!
+	# Updates the enterprise identified by the passed id
+	updateEnterprise(id: ID!, enterprise: EnterpriseInput!) : EnterpriseResponse!
+	# Deletes the enterprise identified by the passed id and leaves all orphan fields
+	deleteEnterprise(id: ID!) : Response!
+	# Deletes the enterprise identified by the passed id and deletes all orphan fields
+	bulkDeleteEnterprise(id: ID!) : Response!
+
+	# Adds the referenced factory to the referenced enterprise
+	addFactoryToEnterprise(factoryId: ID!, enterpriseId : ID!) : EnterpriseResponse!	
+	# Creates a new factory and adds it to the referenced enterprise
+	createFactoryForEnterprise(factory: FactoryInput!, enterpriseId : ID!) : FactoryResponse!
+	# Removes the referenced factory from the referenced enterprise
+	removeFactoryFromEnterprise(factoryId: ID!, enterpriseId : ID!) : EnterpriseResponse!
+
+	# Adds the referenced property to the referenced enterprise
+	addPropertyToEnterprise(propertyId: ID!, enterpriseId : ID!) : EnterpriseResponse!	
+	# Creates a new property and adds it to the referenced enterprise
+	createPropertyForEnterprise(property: PropertyInput!, enterpriseId : ID!) : PropertyResponse!
+	# Removes the referenced property from the referenced enterprise
+	removePropertyFromEnterprise(propertyId: ID!, enterpriseId : ID!) : EnterpriseResponse!
+
+	# Adds the referenced subsidiary to the referenced enterprise
+	addSubsidiaryEnterprise(subsidiaryId: ID!, enterpriseId : ID!) : EnterpriseResponse!
+	# Creates a new subsidiary enterprise and adds it to the referenced enterprise. Returns response with subsidiary enterprise.
+	createSubsidiaryForEnterprise(subsidiary: EnterpriseInput!, enterpriseId : ID!) : EnterpriseResponse!
+	# Removes the referenced subsidiary enterprise from the referenced enterprise
+	removeSubsidiaryFromEnterprise(subsidiaryId: ID!, enterpriseId : ID!) : EnterpriseResponse!
+
+	# Adds the product to the referenced enterprise
+	addProductToEnterprise(productId: ID!, enterpriseId : ID!) : EnterpriseResponse!
+	# Creates a new product and adds it to the referenced enterprise
+	createProductForEnterprise(product: ProductInput, enterpriseId : ID!) : ProductResponse!
+	# Removes the referenced product from the referenced enterprise
+	removeProductFromEnterprise(productId: ID!, enterpriseId : ID!) : EnterpriseResponse!
+
+	# CRUD for production resources, capabilities and processes is intentionally omitted on the enterprise
+	# level in order to force assignment to more specific objects
+
+	# -------Factory-----------
+	# Creates a new factory
+	createFactory(factory: FactoryInput!) : FactoryResponse!
+	# Updates the factory identified by the passed id
+	updateFactory(id: ID!, factory: FactoryInput!) : FactoryResponse!
+	# Deletes the factory identified by the passed id and deletes all orphan fields
+	deleteFactory(id: ID!) : Response!
+
+	# Adds the referenced property to the referenced factory
+	addPropertyToFactory(propertyId: ID!, factoryId : ID!) : FactoryResponse!
+	# Creates a new property and adds it to the referenced factory
+	createPropertyForFactory(property: PropertyInput!, factoryId : ID!) : PropertyResponse!
+	# Removes the referenced property from the referenced factory
+	removePropertyFromFactory(propertyId: ID!, factoryId : ID!) : FactoryResponse!
+
+	# Adds the referenced product to the referenced factory
+	addProductToFactory(productId: ID!, factoryId : ID!) : FactoryResponse!
+	# Creates a new product and adds it to the referenced factory
+	createProductForFactory(product: ProductInput, factoryId : ID!) : ProductResponse!
+	# Removes the referenced product from the referenced factory
+	removeProductFromFactory(productId: ID!, factoryId : ID!) : FactoryResponse!
+
+	# Adds the referenced machine to the referenced factory
+	addMachineToFactory(machineId: ID!, factoryId : ID!) : FactoryResponse!
+	# Creates a new machine and adds it to the referenced factory
+	createMachineForFactory(machine: MachineInput, factoryId : ID!) : MachineResponse!
+	# Removes the referenced machine from the referenced factory
+	removeMachineFromFactory(machineId: ID!, factoryId : ID!) : FactoryResponse!
+
+	# Adds the referenced human resource to the referenced factory
+	addHumanResourceToFactory(humanResourceId: ID!, factoryId : ID!) : FactoryResponse!
+	# Creates a new human resource and adds it to the referenced factory
+	createHumanResourceForFactory(humanResource: HumanResourceInput, factoryId : ID!) : HumanResourceResponse!
+	# Removes the referenced human resource from the referenced factory
+	removeHumanResourceFromFactory(humanResourceId: ID!, factoryId : ID!) : FactoryResponse!
+
+	# Adds the referenced property to the referenced factory
+	addProcessToFactory(processId: ID!, factoryId : ID!) : FactoryResponse!
+	# Creates a new process and adds it to the referenced factory
+	createProcessForFactory(process: ProcessInput, factoryId : ID!) : ProcessResponse!
+	# Removes the referenced process from the referenced factory
+	removeProcessFromFactory(processId: ID!, factoryId : ID!) : FactoryResponse!
+	# -------SupplyChain-----------
+	# Creates a new supply chain
+	createSupplyChain(supplyChain: SupplyChainInput!) : SupplyChainResponse!
+	# Updates the supply chain identified by the passed id
+	updateSupplyChain(id: ID!, supplyChain: SupplyChainInput!) : SupplyChainResponse!
+	# Deletes the supply chain identified by the passed id, its supply chain elements and their product applications. However, products, enterprises and factories will not be deleted by this mutation.
+	deleteSupplyChain(id: ID!) : Response!
+
+	# Adds the referenced supply chain element to the referenced supply chain
+	addSupplyChainElementToSupplyChain(supplyChainElementId: ID!, supplyChainId : ID!) : SupplyChainResponse!
+	# Creates a new supply chain element and adds it to the referenced supply chain
+	createSupplyChainElementForSupplyChain(supplyChainElement: SupplyChainElementInput, supplyChainId : ID!) : SupplyChainElementResponse!
+	# Removes the referenced supply chain element from the referenced supply chain
+	removeSupplyChainElementFromSupplyChain(supplyChainElementId: ID!, supplyChainId : ID!) : SupplyChainResponse!
+	# -------SupplyChainElement-----------
+	# Creates a new supply chain element
+	createSupplyChainElement(supplyChainElement: SupplyChainElementInput!, parentSupplyChainElementIds: [ID], childSupplyChainElementIds: [ID]) : SupplyChainElementResponse!
+	# Updates the supply chain element identified by the passed id
+	updateSupplyChainElement(id: ID!, supplyChainElement: SupplyChainElementInput!, parentSupplyChainElementIds: [ID], childSupplyChainElementIds: [ID]) : SupplyChainElementResponse!
+	# Deletes the supply chain element identified by the passed id and its product applications. However, products, enterprises and factories will not be deleted by this mutation.
+	deleteSupplyChainElement(id: ID!) : Response!
+	# -------Property-----------
+	# Creates a new property
+	createProperty(property: PropertyInput!) : PropertyResponse!
+	# Updates the property identified by the passed id
+	updateProperty(propertyId: ID!, property: PropertyInput!) : PropertyResponse!
+	# Deletes the property identified by the passed id. However, semantic references will not be deleted by this mutation.
+	deleteProperty(propertyId: ID!) : Response!
+
+	# Adds the referenced semantic reference to the referenced property
+	addSemanticReferenceToProperty(semanticReferenceId: ID!, propertyId : ID!) : PropertyResponse!
+	# Creates a new semantic reference and adds it to the referenced property
+	createSemanticReferenceForProperty(semanticReference: SemanticReferenceInput, propertyId : ID!) : SemanticReferenceResponse!
+	# Removes the referenced semantic reference from the referenced property
+	removeSemanticReferenceFromProperty(semanticReferenceId: ID!, propertyId : ID!) : PropertyResponse!
+	# -------Product-----------
+	# Creates a new product
+	createProduct(product: ProductInput!) : ProductResponse!
+	# Updates the product identified by the passed id
+	updateProduct(productId: ID!, product: ProductInput!) : ProductResponse!
+	# Deletes the product identified by the passed id, its product applications and bill of materials incl. the respective product applications, the product's property product classes and semantic references will not be deleted by this mutation.
+	deleteProduct(productId: ID!) : Response!
+	
+	# Adds the referenced property to the referenced product
+	addPropertyToProduct(propertyId: ID!, productId : ID!) : ProductResponse!
+	# Creates a new property and adds it to the referenced product
+	createPropertyForProduct(property: PropertyInput!, productId : ID!) : PropertyResponse!
+	# Removes the referenced property from the referenced product
+	removePropertyFromProduct(propertyId: ID!, productId : ID!) : ProductResponse!
+
+	# Adds the referenced product class to the referenced product
+	addProductClassToProduct(productClassId: ID!, productId : ID!) : ProductResponse!
+	# Creates a new product class and adds it to the referenced product
+	createProductClassForProduct(productClass: ProductClassInput!, productId : ID!) : ProductClassResponse!
+	# Removes the referenced product class from the referenced product
+	removeProductClassFromProduct(productClassId: ID!, productId : ID!) : ProductResponse!
+
+	# Adds the referenced sub-product to the referenced product
+	addSubProductToProduct(subProductProductApplicationId: ID!, productId : ID!) : ProductResponse!	
+	# Creates a new sub-product and adds it to the referenced product. Returns response containing the sub-product.
+	createSubProductForProduct(subProductProductApplication: ProductApplicationInput!, productId : ID!) : ProductApplicationResponse!
+	# Removes the referenced sub-product from referenced product
+	removeSubProductFromProduct(subProductProductApplicationId: ID!, productId : ID!) : ProductResponse!
+
+	# Adds the referenced semantic reference to the referenced product
+	addSemanticReferenceToProduct(semanticReferenceId: ID!, productId : ID!) : ProductResponse!
+	# Creates a new semantic reference and adds it to the referenced product
+	createSemanticReferenceForProduct(semanticReference: SemanticReferenceInput, productId : ID!) : SemanticReferenceResponse!
+	# Removes the referenced semantic reference from referenced product
+	removeSemanticReferenceFromProduct(semanticReferenceId: ID!, productId : ID!) : ProductResponse!
+
+	# Adds the referenced supply chain to the referenced product
+	addSupplyChainToProduct(supplyChainId: ID!, productId : ID!) : ProductResponse!
+	# Creates a new supply chain and adds it to the referenced product
+	createSupplyChainForProduct(supplyChain: SupplyChainInput, productId : ID!) : SupplyChainResponse!
+	# Removes the referenced supply chain from the referenced product
+	removeSupplyChainFromProduct(supplyChainId: ID!, productId : ID!) : ProductResponse!
+	#TODO: ProductPassport
+	# -------Machine-----------
+	createMachine(machine: MachineInput!) : MachineResponse!
+	# Updates the machine identified by the passed id
+	updateMachine(machineId: ID!, machine: MachineInput!) : MachineResponse!
+	# Deletes the machine identified by the passed id and its properties. However, processes, capabilities and semantic references will not be deleted by this mutation.
+	deleteMachine(machineId: ID!) : Response!
+
+	# Adds the referenced property to the referenced machine
+	addPropertyToMachine(propertyId: ID!, machineId : ID!) : MachineResponse!
+	# Creates a new property and adds it to the referenced machine
+	createPropertyForMachine(property: PropertyInput!, machineId : ID!) : PropertyResponse!
+	# Removes the referenced property from the referenced machine
+	removePropertyFromMachine(propertyId: ID!, machineId : ID!) : MachineResponse!
+
+	# Adds a process provided by the machine
+	addProcessToMachine(processId: ID!, machineId : ID!) : MachineResponse!
+	# Removes the referenced process from the referenced machine
+	removeProcessFromMachine(processId: ID!, machineId : ID!) : MachineResponse!
+
+	# Adds a capability provided by the machine
+	addCapabilityToMachine(capabilityId: ID!, machineId : ID!) : MachineResponse!
+	# Removes a capability provided by the machine
+	removeCapabilityFromMachine(capabilityId: ID!, machineId : ID!) : MachineResponse!
+	# -------HumanResource-----------
+	# Creates a new human resource
+	createHumanResource(humanResource: HumanResourceInput!) : HumanResourceResponse!
+	# Updates the human resource identified by the passed id
+	updateHumanResource(humanResourceId: ID!, humanResource: HumanResourceInput!) : HumanResourceResponse!
+	# Deletes the human resource identified by the passed id and its properties. However, processes, capabilities and semantic references will not be deleted by this mutation.
+	deleteHumanResource(humanResourceId: ID!) : Response!
+
+	# Adds a process provided by the human resource
+	addProcessToHumanResource(processId: ID!, humanResourceId : ID!) : HumanResourceResponse!
+	# Removes the referenced process from the human resource
+	removeProcessFromHumanResource(processId: ID!, humanResourceId : ID!) : HumanResourceResponse!
+
+	# Adds a capability provided by the human resource
+	addCapabilityToHumanResource(capabilityId: ID!, humanResourceId : ID!) : HumanResourceResponse!
+	# Removes the referenced capability from the referenced human resource
+	removeCapabilityFromHumanResource(capabilityId: ID!, humanResourceId : ID!) : HumanResourceResponse!
+	# -------ProductClass-----------
+	# Creates a new product
+	createProductClass(productClass: ProductClassInput!, parentProductClassIds: [ID], childProductClassIds: [ID]) : ProductClassResponse!
+	# Updates the product class identified by the passed id
+	updateProductClass(productClassId: ID!, productClass: ProductClassInput!, parentProductClassIds: [ID], childProductClassIds: [ID]) : ProductClassResponse!
+	# Deletes the product class identified by the passed id, its properties and, if deleteChildren is true, the child product classes. However, parent classes, products and semantic references will not be deleted by this mutation.
+	deleteProductClass(productClassId: ID!, deleteChildren: Boolean!) : Response!
+
+	# Adds the referenced semantic reference to the referenced product class
+	addSemanticReferenceToProductClass(semanticReferenceId: ID!, productClassId : ID!) : ProductClassResponse!
+	# Creates a new semantic reference and adds it to the referenced product class
+	createSemanticReferenceForProductClass(semanticReference: SemanticReferenceInput, productClassId : ID!) : SemanticReferenceResponse!
+	# Removes the referenced semantic reference from the referenced product class
+	removeSemanticReferenceFromProductClass(semanticReferenceId: ID!, productClassId : ID!) : ProductClassResponse!
+	# -------Capability-----------
+	# Creates a new capability
+	createCapability(capability: CapabilityInput!, parentCapabilityIds: [ID], childCapabilityIds: [ID]) : CapabilityResponse!
+	# Updates the capability identified by the passed id
+	updateCapability(capabilityId: ID!, capability: CapabilityInput!, parentCapabilityIds: [ID], childCapabilityIds: [ID]) : CapabilityResponse
+	# Deletes the capability identified by the passed id, its properties and, if deleteChildren is true, the child capabilities. However, parent capabilities, processes, production resources and semantic references will not be deleted by this mutation.
+	deleteCapability(capabilityId: ID!, deleteChildren: Boolean!) : Response!
+
+	# Adds the referenced property to the referenced capability
+	addPropertyToCapability(propertyId: ID!, capabilityId : ID!) : CapabilityResponse!
+	# Creates a new property and adds it to the referenced capability
+	createPropertyForCapability(property: PropertyInput!, capabilityId : ID!) : PropertyResponse!
+	# Removes the referenced property from the referenced capability
+	removePropertyFromCapability(propertyId: ID!, capabilityId : ID!) : CapabilityResponse!
+
+	# Adds the referenced process to the referenced capability
+	addProcessToCapability(processId: ID!, capabilityId : ID!) : CapabilityResponse!
+	# Creates a new process and adds it to the referenced capability
+	createProcessForCapability(process: ProcessInput!, capabilityId : ID!) : ProcessResponse!
+	# Removes the referenced process from the referenced capability
+	removeProcessFromCapability(processId: ID!, capabilityId : ID!) : CapabilityResponse!
+
+	# Adds the referenced semantic reference to the referenced capability
+	addSemanticReferenceToCapability(semanticReferenceId: ID!, capabilityId : ID!) : CapabilityResponse!
+	# Creates a new semantic reference and adds it to the referenced capability
+	createSemanticReferenceForCapability(semanticReference: SemanticReferenceInput, capabilityId : ID!) : SemanticReferenceResponse!
+	# Removes the referenced semantic reference from the referenced capability
+	removeSemanticReferenceFromCapability(semanticReferenceId: ID!, capabilityId : ID!) : CapabilityResponse!
+
+	# Adds the referenced production recource to the referenced capability
+	addProductionResourceToCapability(productionResourceId: ID!, capabilityId : ID!) : CapabilityResponse!
+	# removes the referenced production resource from the referenced capability
+	removeProductionResourceFromCapability(productionResourceId: ID!, capabilityId : ID!) : CapabilityResponse!
+	# -------Process-----------
+	# Creates a new process
+	createProcess(process: ProcessInput!, parentProcessIds: [ID], childProcessIds: [ID]) : ProcessResponse!
+	# Updates the process identified by the passed id
+	updateProcess(processId: ID!, process: ProcessInput!, parentProcessIds: [ID], childProcessIds: [ID]) : ProcessResponse!
+	# Deletes the process identified by the passed id, its properties, its product applications and, if deleteChildren is true, the child processes. However, capabilities, parent processes, products, production resources and semantic references will not be deleted by this mutation.
+	deleteProcess(processId: ID!, deleteChildren: Boolean!) : Response!
+
+	# Adds a capability realized by the process
+	addRealizedCapabilityToProcess(capabilityId: ID!, processId : ID!) : ProcessResponse!
+	# Removes the referenced capability from the list of capabilities the referenced process realizes
+	removeRealizedCapabilityFromProcess(capabilityId: ID!, processId : ID!) : ProcessResponse!
+
+	# Adds a capability required by the process
+	addRequiredCapabilityToProcess(capabilityId: ID!, processId : ID!) : ProcessResponse!
+	# Removes the referenced capability from the list of capabilities required by the referenced process
+	removeRequiredCapabilityFromProcess(capabilityId: ID!, processId : ID!) : ProcessResponse!
+
+	# Adds a production resource used by the process
+	addProductionResourceToProcess(productionResourceId: ID!, processId : ID!) : ProcessResponse!
+	# Removes the referenced production resource from the list of production resources used by the referenced process
+	removeProductionResourceFromProcess(productionResourceId: ID!, processId : ID!) : ProcessResponse!
+
+	# Adds the referenced product as input product to the referenced process
+	addInputProductToProcess(productId: ID!, type: InputProductType, processId : ID!) : ProcessResponse!
+	# Removes the referenced input product from the referenced process
+	removeInputProductFromProcess(productId: ID!, type: InputProductType, processId : ID!) : ProcessResponse!
+
+	# Adds the referenced product as output product to the referenced process
+	addOutputProductToProcess(productId: ID!, type: OutputProductType, processId : ID!) : ProcessResponse!
+	# Removes the referenced output product from the referenced process
+	removeOutputProductFromProcess(productId: ID!, type: OutputProductType, processId : ID!) : ProcessResponse!
+
+	# Adds the referenced property to the referenced process
+	addPropertyToProcess(propertyId: ID!, processId : ID!) : ProcessResponse!
+	# Creates a new property and adds it to the referenced process
+	createPropertyForProcess(property: PropertyInput!, processId : ID!) : PropertyResponse!
+	# Removes the referenced property from the referenced process
+	removePropertyFromProcess(propertyId: ID!, processId : ID!) : ProcessResponse!
+	# -------SemanticReference-----------
+	# Creates a new semantic reference
+	createSemanticReference(semanticReference: SemanticReferenceInput!) : SemanticReferenceResponse
+	# Updates the semantic reference identified by the passed id
+	updateSemanticReference(semanticReferenceId: ID!, semanticReference: SemanticReferenceInput!) : SemanticReferenceResponse
+	# Deletes the semantic reference identified by the passed id.
+	deleteSemanticReference(semanticReferenceId: ID!) : Response
+	# -------ProductApplication-----------
+	# Creates a new product application
+	createProductApplication(productApplication: ProductApplicationInput!) : ProductApplicationResponse!
+	# Updates the product application identified by the passed id
+	updateProductApplication(productApplicationId: ID!, productApplication: ProductApplicationInput!) : ProductApplicationResponse!
+	# Deletes the product application identified by the passed id and its properties. However, products and semantic references will not be deleted by this mutation.
+	deleteProductApplication(productApplicationId: ID!) : Response!
+
+	# Adds the referenced property to the referenced product application
+	addPropertyToProductApplication(propertyId: ID!, productApplicationId : ID!) : ProductApplicationResponse!
+	# Creates a new property and adds it to the referenced product application
+	createPropertyForProductApplication(property: PropertyInput!, productApplicationId : ID!) : PropertyResponse!
+	# Removes the referenced property from the referenced product application
+	removePropertyFromProductApplication(propertyId: ID!, productApplicationId : ID!) : ProductApplicationResponse!
+
+	# -------ProductPassport-----------
+	# Creates a new product passport
+	createProductPassport(productPassport: ProductPassportInput!) : ProductPassportResponse!
+	# Updates the product passport identified by the passed id
+	updateProductPassport(productPassportId: ID!, productPassport: ProductPassportInput!) : ProductPassportResponse!
+	# Deletes the product passport identified by the passed id
+	deleteProductPassport(productPassportId: ID!) : Response!
+
+	# -------Location-----------
+	# Creates a new location
+	createLocation(location: LocationInput!) : LocationResponse!
+	# Updates the location identified by the passed id
+	updateLocation(locationId: ID!, location: LocationInput!) : LocationResponse!
+	# Deletes the location identified by the passed id
+	deleteLocation(locationId: ID!) : Response!
+
+	# -------Database-----------
+	deleteAll: Response!
+}
+
+
+interface Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+}
+
+type EnterpriseResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The enterprised addressed by the mutation
+	enterprise: Enterprise
+}
+type PropertyResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The property addressed by the mutation
+	property: Property
+}
+type FactoryResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The factory addressed by the mutation
+	factory: Factory
+}
+type SupplyChainResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The supply chain addressed by the mutation
+	supplyChain: SupplyChain
+}
+type SupplyChainElementResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The supply chain element addressed by the mutation
+	supplyChainElement: SupplyChainElement
+}
+type ProductResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The product addressed by the mutation
+	product: Product
+}
+type MachineResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The machine addressed by the mutation
+	machine: Machine
+}
+type HumanResourceResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The human resource addressed by the mutation
+	humanResource: HumanResource
+}
+type SemanticReferenceResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The semantic reference addressed by the mutation
+	semanticReference: SemanticReference
+}
+type ProductClassResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The product class addressed by the mutation
+	productClass: ProductClass
+}
+type CapabilityResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The capability addressed by the mutation
+	capability: Capability
+}
+type ProcessResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The process addressed by the mutation
+	process: Process
+}
+type ProductApplicationResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The product application addressed by the mutation
+	productApplication: ProductApplication
+}
+type ProductPassportResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The product passport addressed by the mutation
+	productPassport: ProductPassport
+}
+type LocationResponse implements Response {
+	# Http response code
+	code: Int!
+	# True if the mutation has been a success and false otherwise
+	success: Boolean!
+	# A response message
+	message: String!
+	# The location addressed by the mutation
+	location: Location
+}

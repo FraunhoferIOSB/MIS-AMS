@@ -1,0 +1,1355 @@
+swagger: "2.0"
+info:
+  description: "Smart Factory Web (SFW) - [https://www.smartfactoryweb.de](https://www.smartfactoryweb.de)"
+  version: "1.0"
+  title: "Smart Factory Web - API"
+
+#Best Practice:
+#https://restfulapi.net/resource-naming/
+
+tags:
+- name: "Enterprise"
+- name: "Factory"
+- name: "Machine"
+- name: "Product"
+- name: "Capability"
+- name: "Property"
+- name: "Process"
+- name: "SupplyChain"
+- name: "Production Resource"
+- name: "Product Class"
+  description: "List of factories. Not directly modelled"
+  
+
+paths:
+  /properties:
+    get:
+      summary: "List of property instances including their semantics."
+      tags:
+        - "Property"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Property"
+        "405":
+          description: "Invalid input"
+  /properties/{propertyId}:
+    get:
+      tags:
+        - Property
+      summary: Find property by ID
+      description: Returns a property
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: propertyId
+          description: ID of property that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Property"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Property not found
+  /properties/{propertyId}/semantics:
+    get:
+      tags:
+        - Property
+      summary: Find the semantics of a property by ID
+      description: Returns the semantics of a property
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: propertyId
+          description: ID of property that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Semantic"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Property not found
+        
+  /properties/semantics:
+    get:
+      summary: "List of semantics."
+      tags:
+        - "Property"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Semantic"
+        "405":
+          description: "Invalid input"
+  
+  # Filtern über parameter
+          
+  /production-resources/{production-resourceId}:
+    get:
+      tags:
+        - "Production Resource"
+      summary: Find production-resource by ID
+      description: Returns a production-resource with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: production-resourceId
+          description: ID of the production-resource
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/ProductionResource"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Production-resource not found
+            
+  /production-resources/{production-resourceId}/capabilities:
+    get:
+      tags:
+        - "Production Resource"
+      summary: Find capabilities realized by the production-resource with the given ID
+      description: Returns capabilities realized by the production-resource with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: production-resourceId
+          description: ID of the production-resource
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Capability"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Production-resource not found
+          
+  /production-resources/{production-resourceId}/processes:
+    get:
+      tags:
+        - "Production Resource"
+      summary: Find processes realized by the production-resource with the given ID
+      description: Returns processes realized by the production-resource with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: production-resourceId
+          description: ID of the production-resource
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Process"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Production-resource not found
+  
+  /production-resources/{production-resourceId}/properties:
+    get:
+      tags:
+        - "Production Resource"
+      summary: Find properties realized by the production-resource with the given ID
+      description: Returns properties realized by the production-resource with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: production-resourceId
+          description: ID of the production-resource
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Property"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Production-resource not found
+  
+  
+  /production-resources/{production-resourceId}/factories:
+    get:
+      tags:
+        - "Production Resource"
+      summary: Find factories realized by the production-resource with the given ID
+      description: Returns factories realized by the production-resource with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: production-resourceId
+          description: ID of the production-resource
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Factory"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Production-resource not found
+  
+  # factories are typed with VirtualFactory and Factory (/factories?type=)
+  
+  /factories:
+    get:
+      tags:
+        - Factory
+      summary: List of factory instances
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Factory"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Factories not found
+            
+  /factories/{factoryId}:
+    get:
+      tags:
+        - Factory
+      summary: Find factory by ID
+      description: Returns a factory with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: factoryId
+          description: ID of the factory
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Factory"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Factory not found
+            
+  /factories/{factoryId}/properties:
+    get:
+      tags:
+        - Factory
+      summary: Find properties realized by the factory with the given ID
+      description: Returns properties realized by the factory with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: factoryId
+          description: ID of the capability
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Property"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Factory not found
+              
+  /factories/{factoryId}/products:
+    get:
+      tags:
+        - Factory
+      summary: Find products realized by the factory with the given ID
+      description: Returns products realized by the factory with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: factoryId
+          description: ID of the capability
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Product"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Factory not found
+              
+  /factories/{factoryId}/production-resources:
+    get:
+      tags:
+        - Factory
+      summary: Find production-resources realized by the factory with the given ID
+      description: Returns production-resources realized by the factory with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: factoryId
+          description: ID of the capability
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ProductionResource"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Factory not found
+  
+  /capabilities:
+    get:
+      tags:
+        - Capability
+      summary: List of capability instances
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Capability"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Capability not found
+  
+  /capabilities/{capabilityId}:
+    get:
+      tags:
+        - Capability
+      summary: Find capability by ID
+      description: Returns a capability with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: capabilityId
+          description: ID of the capability
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Capability"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Capability not found
+  
+  /capabilities/{capabilityId}/semantics:
+    get:
+      tags:
+        - Capability
+      summary: Find semantics realized by the capability with the given ID
+      description: Returns semantics realized by the process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: capabilityId
+          description: ID of the capability
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Semantic"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Capability not found
+  
+  
+  /capabilities/semantics:
+    get:
+      tags:
+        - Capability
+      summary: Find semantics realized by the capabilities
+      description: Returns semantics realized by the capabilities
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Semantic"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Capabilities not found
+  
+  /capabilities/{capabilityId}/properties:
+    get:
+      tags:
+        - Capability
+      summary: Find properties realized by the capability with the given ID
+      description: Returns properties realized by the capability with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: capabilityId
+          description: ID of the capability
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Property"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Capability not found
+              
+  /capabilities/{capabilityId}/capabilities:
+    get:
+      tags:
+        - Capability
+      summary: Find sub capabilities realized by the capability with the given ID
+      description: Return the sub capabilities realized by the capability with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: capabilityId
+          description: ID of the capability
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Capability"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Capability not found
+
+  
+  /processes/{processId}:
+    get:
+      tags:
+        - Process
+      summary: Find process by ID
+      description: Returns a process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: processId
+          description: ID of the process
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Process"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /processes/{processId}/capabilities:
+    get:
+      tags:
+        - Process
+      summary: Find capabilities realized by the process with the given ID
+      description: Returns capabilities realized by the process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: processId
+          description: ID of the process
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Capability"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /processes/{processId}/input-products:
+    get:
+      tags:
+        - Process
+      summary: Find products used as input by the process with the given ID
+      description: Returns products used as input by the process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: processId
+          description: ID of the process
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Product"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /processes/{processId}/output-products:
+    get:
+      tags:
+        - Process
+      summary: Find products used as output by the process with the given ID
+      description: Returns products used as output by the process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: processId
+          description: ID of the process
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Product"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /processes/{processId}/properties:
+    get:
+      tags:
+        - Process
+      summary: Find properties of the process with the given ID
+      description: Returns  properties of the process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: processId
+          description: ID of the process
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Property"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /processes/{processId}/production-resources:
+    get:
+      tags:
+        - Process
+      summary: Find production resources of the process with the given ID
+      description: Returns production resources of the process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: processId
+          description: ID of the process
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ProductionResource"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /processes/{processId}/enterprises:
+    get:
+      tags:
+        - Process
+      summary: Find enterprises supporting the process with the given ID
+      description: Returns enterprises supporting the process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: processId
+          description: ID of the process
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Enterprise"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /processes/{processId}/factories:
+    get:
+      tags:
+        - Process
+      summary: Find factories supporting the process with the given ID
+      description: Returns factories supporting the process with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: processId
+          description: ID of the process
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Factory"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /products:
+    get:
+      tags:
+      - "Product"
+      summary: "List of all product instances"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Product"
+        "401":
+          description: "Unauthorized"
+        "403":
+          description: "Forbidden"
+        "405":
+          description: "Invalid input"
+          
+  /products/{productId}:
+    get:
+      tags:
+        - Product
+      summary: Find product with the given ID
+      description: Returns product with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productId
+          description: ID of the product
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Product"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+          
+  /products/{productId}/properties:
+    get:
+      tags:
+        - Product
+      summary: Find properties of the product with the given ID
+      description: Returns  properties of the product with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productId
+          description: ID of the product
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Property"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+          
+  /products/{productId}/enterprises:
+    get:
+      tags:
+        - Product
+      summary: Find enterprises offering the product with the given ID
+      description: Returns enterprises offering the product with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productId
+          description: ID of the product
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Enterprise"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  /products/{productId}/product-classes:
+    get:
+      tags:
+        - Product
+      summary: Find product classes of the product with the given ID
+      description: Returns  product classes of the product with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productId
+          description: ID of the product
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ProductClass"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  /product-classes:
+    get:
+      summary: "List of product class"
+      tags:
+        - "Product Class"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ProductClass"
+        "405":
+          description: "Invalid input"
+  /product-classes/semantics:
+    get:
+      summary: "List of product class semantics."
+      tags:
+        - "Product Class"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Semantic"
+        "405":
+          description: "Invalid input"
+  /product-classes/{productClassId}:
+    get:
+      tags:
+        - Product
+      summary: Find product class with the given ID
+      description: Returns product class with the given ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productClassId
+          description: ID of the product
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/ProductClass"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+          
+  /product-classes/{productClassId}/semantics:
+    get:
+      summary: "Finds semantics of the product class with the given ID"
+      description: Returns semantics of the product class with the given ID
+      tags:
+        - "Product Class"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: path
+          name: productClassId
+          description: ID of the product
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Semantic"
+        "405":
+          description: "Invalid input"
+          
+  /product-classes/{productClassId}/products:
+    get:
+      summary: "Finds products of the product class with the given ID"
+      description: Returns products of the product class with the given ID
+      tags:
+        - "Product Class"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: path
+          name: productClassId
+          description: ID of the product
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Product"
+        "405":
+          description: "Invalid input"
+
+  /enterprises:
+    get:
+      tags:
+      - "Enterprise"
+      summary: "List of enterprise instances"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Enterprise"
+        "401":
+          description: "Unauthorized"
+        "403":
+          description: "Forbidden"
+        "405":
+          description: "Invalid input"
+  /enterprises/{enterpriseId}:
+    get:
+      tags:
+        - Enterprise
+      summary: Find enterprise by ID
+      description: Returns a enterprise
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: enterpriseId
+          description: ID of enterprise that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Enterprise"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  /enterprises/{enterpriseId}/properties:
+    get:
+      tags:
+        - Enterprise
+      summary: Find the properties of an enterprise
+      description: Returns the properties of an enterprise
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: enterpriseId
+          description: ID of enterprise that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Property"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  /enterprises/{enterpriseId}/products:
+    get:
+      tags:
+        - Enterprise
+      summary: Find the products of an enterprise
+      description: Returns the products of an enterprise
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: enterpriseId
+          description: ID of enterprise that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Requested products
+          schema:
+                type: array
+                items: 
+                  $ref: "#/definitions/Product"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  /enterprises/{enterpriseId}/factories:
+    get:
+      tags:
+        - Enterprise
+      summary: Find the factories of an enterprise
+      description: Returns the factories of an enterprise
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: enterpriseId
+          description: ID of enterprise that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Factories of the enterprise
+          schema:
+                type: array
+                items: 
+                  $ref: "#/definitions/Factory"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  /enterprises/{enterpriseId}/production-resources:
+    get:
+      tags:
+        - Enterprise
+      summary: Find the production-resources of an enterprise
+      description: Returns the production-resources of an enterprise
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: enterpriseId
+          description: ID of enterprise that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Production resources of the enterprise
+          schema:
+                type: array
+                items: 
+                  $ref: "#/definitions/ProductionResource"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  /enterprises/{enterpriseId}/capabilities:
+    get:
+      tags:
+        - Enterprise
+      summary: Find the Capabilities of an enterprise
+      description: Returns the Capabilities of an enterprise
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: enterpriseId
+          description: ID of enterprise that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Capabilities of the enterprise
+          schema:
+                type: array
+                items: 
+                  $ref: "#/definitions/Capability"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  /enterprises/{enterpriseId}/capabilities/semantics:
+    get:
+      tags:
+        - Enterprise
+      summary: Find the semantics of the capabilities of an enterprise
+      description: Returns the semantics of the Capabilities of an enterprise
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: enterpriseId
+          description: ID of enterprise that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Semantics of the Capabilities of the enterprise
+          schema:
+                type: array
+                items: 
+                  $ref: "#/definitions/Semantic"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+
+  /semantics/{semanticId}:
+    get:
+      tags:
+        - Semantic
+      summary: Find a specific semantic by id
+      description: Returns the Semantic definition
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: semanticId
+          description: ID of the semantic that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Capabilities of the enterprise
+          schema:
+            $ref: "#/definitions/Semantic"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Enterprise not found
+  
+  #/properties/{propertyId}/semantics:
+
+definitions:
+  Factory: #Non-virtual factory
+    type: "object"
+    properties: 
+      Name:
+        type: "string"
+      Description: 
+        type: "string"
+      Properties:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Property'
+  
+  ProductionResource:
+    type: "object"
+    properties: 
+      Name:
+        type: "string"
+      Description: 
+        type: "string"
+      Properties:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Property'
+          
+  Enterprise:
+    type: "object"
+    properties: 
+      Name:
+        type: "string"
+      Description: 
+        type: "string"
+      Properties:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Property'
+          
+  Process:
+    type: "object"
+    properties: 
+      Name:
+        type: "string"
+      Description: 
+        type: "string"
+      Properties:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Property'
+      Capabilities:
+        type: array
+        items: 
+          $ref: '#/definitions/Capability'
+      InputProducts:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Product'
+      OutputProducts:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Product'
+          
+  Product:
+    type: "object"
+    properties: 
+      Name:
+        type: "string"
+      Description: 
+        type: "string"
+      Properties:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Property'
+          
+  ProductClass:
+    type: "object"
+    properties: 
+      Name:
+        type: "string"
+      Description: 
+        type: "string"
+      Properties:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Property'
+      Semantics:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Semantic'
+
+  OfferedCapabilities:
+    type: "object"
+    properties: 
+      Capabilities:
+        type: array
+        items: 
+          $ref: '#/definitions/Capability' 
+      
+  Capability:
+    type: "object"
+    properties: 
+      Name: 
+        type: "string"
+        example: "Capability X"
+      Description: 
+        type: "string"
+      Properties:
+        type: array
+        items: 
+          $ref: '#/definitions/Property'
+      Capabilities:
+        type: array
+        items: 
+          $ref: '#/definitions/Capability'
+      Semantics:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Semantic'
+      
+  Semantic:
+    type: "object"
+    properties: 
+      identifier: 
+        type: "string"
+        example: "http://iosb.fraunhofer.de/bamm#example_aspect"
+      endpoint: 
+        type: "string"
+        example: "http://iosb.fraunhofer.de/bamm/example_aspect.ttl"
+      
+  Property:
+    type: "object"
+    properties: 
+      Name: 
+        type: "string"
+        example: "Property X"
+      Unit: 
+        type: "string"
+      Value:
+        type: "string"
+      MinValue:
+        type: "string"
+      MaxValue:
+        type: "string"
+      Semantics:
+        type: "array"
+        items: 
+          $ref: '#/definitions/Semantic'

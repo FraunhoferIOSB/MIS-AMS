@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
+    <title>ID</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
+</head>
+<body class="slds-scrollable--y">
+    <nav class="slds-grid slds-grid--vertical slds-col--rule-right">
+        <header class="slds-p-around--medium slds-col slds-shrik slds-grow-none">
+            <button class="slds-button slds-button--icon slds-float--right js-toggle-navigation less-than-medium">
+                <i class="material-icons">close</i>
+            </button>
+                <h3 class="slds-text-heading--medium"><a href="./">GraphQL Schema</a></h3>
+            <div class="slds-p-top--small">
+                <input id="type-search" type="text" placeholder="Search a type" autofocus="" class="slds-input" />
+            </div>
+        </header>
+        <div id="navication-scroll" class="slds-scrollable--y slds-col slds-grow">
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Schema</h4>
+    <ul>
+        <li  title="Query">
+            <a href="query.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Query
+            </a>
+        </li>
+        <li  title="Mutation">
+            <a href="mutation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Mutation
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Scalars</h4>
+    <ul>
+        <li  title="Boolean">
+            <a href="boolean.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Boolean
+            </a>
+        </li>
+        <li class="slds-is-active" title="ID">
+            <a href="id.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ID
+            </a>
+        </li>
+        <li  title="Int">
+            <a href="int.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Int
+            </a>
+        </li>
+        <li  title="String">
+            <a href="string.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                String
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Enums</h4>
+    <ul>
+        <li  title="InputProductType">
+            <a href="inputproducttype.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                InputProductType
+            </a>
+        </li>
+        <li  title="OutputProductType">
+            <a href="outputproducttype.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                OutputProductType
+            </a>
+        </li>
+        <li  title="__DirectiveLocation">
+            <a href="directivelocation.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __DirectiveLocation
+            </a>
+        </li>
+        <li  title="__TypeKind">
+            <a href="typekind.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __TypeKind
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Interfaces</h4>
+    <ul>
+        <li  title="ProductionResource">
+            <a href="productionresource.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductionResource
+            </a>
+        </li>
+        <li  title="Response">
+            <a href="response.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Response
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
+    <ul>
+        <li  title="Capability">
+            <a href="capability.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Capability
+            </a>
+        </li>
+        <li  title="CapabilityResponse">
+            <a href="capabilityresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CapabilityResponse
+            </a>
+        </li>
+        <li  title="Enterprise">
+            <a href="enterprise.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Enterprise
+            </a>
+        </li>
+        <li  title="EnterpriseResponse">
+            <a href="enterpriseresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                EnterpriseResponse
+            </a>
+        </li>
+        <li  title="Factory">
+            <a href="factory.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Factory
+            </a>
+        </li>
+        <li  title="FactoryResponse">
+            <a href="factoryresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                FactoryResponse
+            </a>
+        </li>
+        <li  title="HumanResource">
+            <a href="humanresource.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                HumanResource
+            </a>
+        </li>
+        <li  title="HumanResourceResponse">
+            <a href="humanresourceresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                HumanResourceResponse
+            </a>
+        </li>
+        <li  title="Location">
+            <a href="location.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Location
+            </a>
+        </li>
+        <li  title="LocationResponse">
+            <a href="locationresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                LocationResponse
+            </a>
+        </li>
+        <li  title="Machine">
+            <a href="machine.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Machine
+            </a>
+        </li>
+        <li  title="MachineResponse">
+            <a href="machineresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                MachineResponse
+            </a>
+        </li>
+        <li  title="Process">
+            <a href="process.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Process
+            </a>
+        </li>
+        <li  title="ProcessResponse">
+            <a href="processresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProcessResponse
+            </a>
+        </li>
+        <li  title="Product">
+            <a href="product.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Product
+            </a>
+        </li>
+        <li  title="ProductApplication">
+            <a href="productapplication.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductApplication
+            </a>
+        </li>
+        <li  title="ProductApplicationResponse">
+            <a href="productapplicationresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductApplicationResponse
+            </a>
+        </li>
+        <li  title="ProductClass">
+            <a href="productclass.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductClass
+            </a>
+        </li>
+        <li  title="ProductClassResponse">
+            <a href="productclassresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductClassResponse
+            </a>
+        </li>
+        <li  title="ProductPassport">
+            <a href="productpassport.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductPassport
+            </a>
+        </li>
+        <li  title="ProductPassportResponse">
+            <a href="productpassportresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductPassportResponse
+            </a>
+        </li>
+        <li  title="ProductResponse">
+            <a href="productresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductResponse
+            </a>
+        </li>
+        <li  title="Property">
+            <a href="property.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Property
+            </a>
+        </li>
+        <li  title="PropertyResponse">
+            <a href="propertyresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PropertyResponse
+            </a>
+        </li>
+        <li  title="SemanticReference">
+            <a href="semanticreference.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SemanticReference
+            </a>
+        </li>
+        <li  title="SemanticReferenceResponse">
+            <a href="semanticreferenceresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SemanticReferenceResponse
+            </a>
+        </li>
+        <li  title="SupplyChain">
+            <a href="supplychain.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SupplyChain
+            </a>
+        </li>
+        <li  title="SupplyChainElement">
+            <a href="supplychainelement.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SupplyChainElement
+            </a>
+        </li>
+        <li  title="SupplyChainElementResponse">
+            <a href="supplychainelementresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SupplyChainElementResponse
+            </a>
+        </li>
+        <li  title="SupplyChainResponse">
+            <a href="supplychainresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SupplyChainResponse
+            </a>
+        </li>
+        <li  title="__Directive">
+            <a href="directive.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Directive
+            </a>
+        </li>
+        <li  title="__EnumValue">
+            <a href="enumvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __EnumValue
+            </a>
+        </li>
+        <li  title="__Field">
+            <a href="field.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Field
+            </a>
+        </li>
+        <li  title="__InputValue">
+            <a href="inputvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __InputValue
+            </a>
+        </li>
+        <li  title="__Schema">
+            <a href="schema.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Schema
+            </a>
+        </li>
+        <li  title="__Type">
+            <a href="type.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Type
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Input Objects</h4>
+    <ul>
+        <li  title="CapabilityFilter">
+            <a href="capabilityfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CapabilityFilter
+            </a>
+        </li>
+        <li  title="CapabilityInput">
+            <a href="capabilityinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CapabilityInput
+            </a>
+        </li>
+        <li  title="EnterpriseFilter">
+            <a href="enterprisefilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                EnterpriseFilter
+            </a>
+        </li>
+        <li  title="EnterpriseInput">
+            <a href="enterpriseinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                EnterpriseInput
+            </a>
+        </li>
+        <li  title="FactoryFilter">
+            <a href="factoryfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                FactoryFilter
+            </a>
+        </li>
+        <li  title="FactoryInput">
+            <a href="factoryinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                FactoryInput
+            </a>
+        </li>
+        <li  title="HumanResourceFilter">
+            <a href="humanresourcefilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                HumanResourceFilter
+            </a>
+        </li>
+        <li  title="HumanResourceInput">
+            <a href="humanresourceinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                HumanResourceInput
+            </a>
+        </li>
+        <li  title="LocationFilter">
+            <a href="locationfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                LocationFilter
+            </a>
+        </li>
+        <li  title="LocationInput">
+            <a href="locationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                LocationInput
+            </a>
+        </li>
+        <li  title="MachineFilter">
+            <a href="machinefilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                MachineFilter
+            </a>
+        </li>
+        <li  title="MachineInput">
+            <a href="machineinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                MachineInput
+            </a>
+        </li>
+        <li  title="ProcessFilter">
+            <a href="processfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProcessFilter
+            </a>
+        </li>
+        <li  title="ProcessInput">
+            <a href="processinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProcessInput
+            </a>
+        </li>
+        <li  title="ProductApplicationFilter">
+            <a href="productapplicationfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductApplicationFilter
+            </a>
+        </li>
+        <li  title="ProductApplicationInput">
+            <a href="productapplicationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductApplicationInput
+            </a>
+        </li>
+        <li  title="ProductClassFilter">
+            <a href="productclassfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductClassFilter
+            </a>
+        </li>
+        <li  title="ProductClassInput">
+            <a href="productclassinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductClassInput
+            </a>
+        </li>
+        <li  title="ProductFilter">
+            <a href="productfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductFilter
+            </a>
+        </li>
+        <li  title="ProductInput">
+            <a href="productinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductInput
+            </a>
+        </li>
+        <li  title="ProductPassportFilter">
+            <a href="productpassportfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductPassportFilter
+            </a>
+        </li>
+        <li  title="ProductPassportInput">
+            <a href="productpassportinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProductPassportInput
+            </a>
+        </li>
+        <li  title="PropertyFilter">
+            <a href="propertyfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PropertyFilter
+            </a>
+        </li>
+        <li  title="PropertyInput">
+            <a href="propertyinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PropertyInput
+            </a>
+        </li>
+        <li  title="SemanticReferenceFilter">
+            <a href="semanticreferencefilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SemanticReferenceFilter
+            </a>
+        </li>
+        <li  title="SemanticReferenceInput">
+            <a href="semanticreferenceinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SemanticReferenceInput
+            </a>
+        </li>
+        <li  title="SupplyChainElementFilter">
+            <a href="supplychainelementfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SupplyChainElementFilter
+            </a>
+        </li>
+        <li  title="SupplyChainElementInput">
+            <a href="supplychainelementinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SupplyChainElementInput
+            </a>
+        </li>
+        <li  title="SupplyChainFilter">
+            <a href="supplychainfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SupplyChainFilter
+            </a>
+        </li>
+        <li  title="SupplyChainInput">
+            <a href="supplychaininput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SupplyChainInput
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Directives</h4>
+    <ul>
+        <li  title="deprecated">
+            <a href="deprecated.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                deprecated
+            </a>
+        </li>
+        <li  title="include">
+            <a href="include.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                include
+            </a>
+        </li>
+        <li  title="skip">
+            <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                skip
+            </a>
+        </li>
+    </ul>
+</div>
+        </div>
+    </nav>
+    <main><section class="title slds-theme--inverse">
+    <div class="container slds-grid">
+        <div>
+        <button class="slds-button js-toggle-navigation less-than-medium">
+            <i class="material-icons slds-button__icon slds-button__icon--left">menu</i>
+            <span class="slds-text-title--caps">Types<span>
+        </button>
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <p class="slds-text-title--caps slds-text-color--weak">SCALAR</p>
+        <h1 class="slds-text-heading--large">ID</h1>
+        <div class="slds-text-body--regular"><p>The <code>ID</code> scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as <code>&quot;4&quot;</code>) or integer (such as <code>4</code>) input value will be accepted as an ID.</p>
+</div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="graphql-schema-definition" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#graphql-schema-definition">
+                <i class="material-icons">link</i>
+            </a>
+            GraphQL Schema definition
+        </h2>
+        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">scalar</span> <span class="identifier">ID</span></li></ul></code>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="require-by" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#require-by">
+                <i class="material-icons">link</i>
+            </a>
+            Require by
+        </h2>
+        <ul class="require-by"><li><a href="capability.doc.html" title="Capability - A production capability. The capabilities are ordered hierarchically. It is imporant to provide semantic references or at least descriptions of the capability. Otherwise it might not be found by the search engine.">Capability<em>A production capability. The capabilities are ordered hierarchically. It is imporant to provide semantic references or at least descriptions of the capability. Otherwise it might not be found by the search engine.</em></a><li><li><a href="capabilityfilter.doc.html" title="CapabilityFilter - Fields of a capability which can be passed to queries as filters.">CapabilityFilter<em>Fields of a capability which can be passed to queries as filters.</em></a><li><li><a href="capabilityinput.doc.html" title="CapabilityInput - Fields of a capability which can be passed to mutations.">CapabilityInput<em>Fields of a capability which can be passed to mutations.</em></a><li><li><a href="enterprise.doc.html" title="Enterprise - An enterprise or company which is a supplier in a supply chain, provider of production capabilities, etc.">Enterprise<em>An enterprise or company which is a supplier in a supply chain, provider of production capabilities, etc.</em></a><li><li><a href="enterprisefilter.doc.html" title="EnterpriseFilter - Fields of a enterprise which can be passed to queries as filters.">EnterpriseFilter<em>Fields of a enterprise which can be passed to queries as filters.</em></a><li><li><a href="enterpriseinput.doc.html" title="EnterpriseInput - Fields of an enterprise which can be passed to mutations.">EnterpriseInput<em>Fields of an enterprise which can be passed to mutations.</em></a><li><li><a href="factory.doc.html" title="Factory - A factory which is part of an enterprise and contains production resources.">Factory<em>A factory which is part of an enterprise and contains production resources.</em></a><li><li><a href="factoryfilter.doc.html" title="FactoryFilter - Fields of a factory which can be passed to queries as filters.">FactoryFilter<em>Fields of a factory which can be passed to queries as filters.</em></a><li><li><a href="factoryinput.doc.html" title="FactoryInput - Fields of a factory which can be passed to mutations.">FactoryInput<em>Fields of a factory which can be passed to mutations.</em></a><li><li><a href="humanresource.doc.html" title="HumanResource - An anonymous human resource as production resource to represent certain expertise and certification. Please do not add personal information!">HumanResource<em>An anonymous human resource as production resource to represent certain expertise and certification. Please do not add personal information!</em></a><li><li><a href="humanresourcefilter.doc.html" title="HumanResourceFilter - Fields of a human resource which can be passed to queries as filters.">HumanResourceFilter<em>Fields of a human resource which can be passed to queries as filters.</em></a><li><li><a href="humanresourceinput.doc.html" title="HumanResourceInput - Fields of a human resource which can be passed to mutations.">HumanResourceInput<em>Fields of a human resource which can be passed to mutations.</em></a><li><li><a href="location.doc.html" title="Location - A location containing coordinates and an address">Location<em>A location containing coordinates and an address</em></a><li><li><a href="locationfilter.doc.html" title="LocationFilter - Fields of a location which can be passed to queries to filter results.">LocationFilter<em>Fields of a location which can be passed to queries to filter results.</em></a><li><li><a href="locationinput.doc.html" title="LocationInput - Fields of a location which can be passed to mutations.">LocationInput<em>Fields of a location which can be passed to mutations.</em></a><li><li><a href="machine.doc.html" title="Machine - A machine of a factory as a production resource which should be linked to processes and capabilities.">Machine<em>A machine of a factory as a production resource which should be linked to processes and capabilities.</em></a><li><li><a href="machinefilter.doc.html" title="MachineFilter - Fields of a machine which can be passed to queries as filters.">MachineFilter<em>Fields of a machine which can be passed to queries as filters.</em></a><li><li><a href="machineinput.doc.html" title="MachineInput - Fields of a machine which can be passed to mutations.">MachineInput<em>Fields of a machine which can be passed to mutations.</em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="process.doc.html" title="Process - A process description which schould be linked to capabilities, input/output products and production resources. Input/output products do not have to be added if they are added to the sub processes and the sub processes are ordered via their input/output products.">Process<em>A process description which schould be linked to capabilities, input/output products and production resources. Input/output products do not have to be added if they are added to the sub processes and the sub processes are ordered via their input/output products.</em></a><li><li><a href="processfilter.doc.html" title="ProcessFilter - Fields of a process which can be passed to queries as filters.">ProcessFilter<em>Fields of a process which can be passed to queries as filters.</em></a><li><li><a href="processinput.doc.html" title="ProcessInput - Fields of a process which can be passed to mutations.">ProcessInput<em>Fields of a process which can be passed to mutations.</em></a><li><li><a href="product.doc.html" title="Product - An end product (can also be a material) or a product used to produce another product. It includes information about its supply chain and references its product passport.">Product<em>An end product (can also be a material) or a product used to produce another product. It includes information about its supply chain and references its product passport.</em></a><li><li><a href="productapplication.doc.html" title="ProductApplication - A container for product usage metadata, like quantity. This is important to model input and output products of processes.">ProductApplication<em>A container for product usage metadata, like quantity. This is important to model input and output products of processes.</em></a><li><li><a href="productapplicationfilter.doc.html" title="ProductApplicationFilter - Fields of a product application (Product metadata container) which can be passed to queries as filters.">ProductApplicationFilter<em>Fields of a product application (Product metadata container) which can be passed to queries as filters.</em></a><li><li><a href="productapplicationinput.doc.html" title="ProductApplicationInput - Fields of a product application (Product metadata container) which can be passed to mutations.">ProductApplicationInput<em>Fields of a product application (Product metadata container) which can be passed to mutations.</em></a><li><li><a href="productclass.doc.html" title="ProductClass - A product type or class which describes the cathegory of a product.">ProductClass<em>A product type or class which describes the cathegory of a product.</em></a><li><li><a href="productclassfilter.doc.html" title="ProductClassFilter - Fields of a product class which can be passed to queries as filters.">ProductClassFilter<em>Fields of a product class which can be passed to queries as filters.</em></a><li><li><a href="productclassinput.doc.html" title="ProductClassInput - Fields of a product class which can be passed to mutations.">ProductClassInput<em>Fields of a product class which can be passed to mutations.</em></a><li><li><a href="productfilter.doc.html" title="ProductFilter - Fields of a product which can be passed to queries as filters.">ProductFilter<em>Fields of a product which can be passed to queries as filters.</em></a><li><li><a href="productinput.doc.html" title="ProductInput - Fields of a product which can be passed to mutations.">ProductInput<em>Fields of a product which can be passed to mutations.</em></a><li><li><a href="productionresource.doc.html" title="ProductionResource - Abstract production resource definition. It is specialized by Machine and HumanResource.">ProductionResource<em>Abstract production resource definition. It is specialized by Machine and HumanResource.</em></a><li><li><a href="productpassport.doc.html" title="ProductPassport - A digital product passport reference.">ProductPassport<em>A digital product passport reference.</em></a><li><li><a href="productpassportfilter.doc.html" title="ProductPassportFilter - Fields of a product passport which can be passed to queries as filters.">ProductPassportFilter<em>Fields of a product passport which can be passed to queries as filters.</em></a><li><li><a href="productpassportinput.doc.html" title="ProductPassportInput - Fields of a product passport which can be passed to mutations.">ProductPassportInput<em>Fields of a product passport which can be passed to mutations.</em></a><li><li><a href="property.doc.html" title="Property - A property is a slice of information about an entity or capability. It is recommended to define at least one semantic reference for the property which is a BAMM model. This way applications can dynamically select the correct data and form type in interfaces to create, read or update the property.">Property<em>A property is a slice of information about an entity or capability. It is recommended to define at least one semantic reference for the property which is a BAMM model. This way applications can dynamically select the correct data and form type in interfaces to create, read or update the property.</em></a><li><li><a href="propertyfilter.doc.html" title="PropertyFilter - Fields of a property which can be passed to queries as filters.">PropertyFilter<em>Fields of a property which can be passed to queries as filters.</em></a><li><li><a href="propertyinput.doc.html" title="PropertyInput - Fields of a property which can be passed to mutations.">PropertyInput<em>Fields of a property which can be passed to mutations.</em></a><li><li><a href="semanticreference.doc.html" title="SemanticReference - A reference to a concrete semantic, like to a concrete term in a taxonomy like eClass.">SemanticReference<em>A reference to a concrete semantic, like to a concrete term in a taxonomy like eClass.</em></a><li><li><a href="semanticreferencefilter.doc.html" title="SemanticReferenceFilter - Fields of a semantic reference which can be passed to queries as filters.">SemanticReferenceFilter<em>Fields of a semantic reference which can be passed to queries as filters.</em></a><li><li><a href="semanticreferenceinput.doc.html" title="SemanticReferenceInput - Fields of a semantic reference which can be passed to mutations.">SemanticReferenceInput<em>Fields of a semantic reference which can be passed to mutations.</em></a><li><li><a href="supplychain.doc.html" title="SupplyChain - A supply chain container, consisting of supply chain elements to represent the whole supply chain.">SupplyChain<em>A supply chain container, consisting of supply chain elements to represent the whole supply chain.</em></a><li><li><a href="supplychainelement.doc.html" title="SupplyChainElement - Supplier within a certain supply chain. Multiple factories of one company have to be divided into multiple supply chain elements.">SupplyChainElement<em>Supplier within a certain supply chain. Multiple factories of one company have to be divided into multiple supply chain elements.</em></a><li><li><a href="supplychainelementfilter.doc.html" title="SupplyChainElementFilter - Fields of a supply chain element which can be passed to queries as filters.">SupplyChainElementFilter<em>Fields of a supply chain element which can be passed to queries as filters.</em></a><li><li><a href="supplychainelementinput.doc.html" title="SupplyChainElementInput - Fields of a supply chain element which can be passed to mutations.">SupplyChainElementInput<em>Fields of a supply chain element which can be passed to mutations.</em></a><li><li><a href="supplychainfilter.doc.html" title="SupplyChainFilter - Fields of a supply chain which can be passed to queries as filters.">SupplyChainFilter<em>Fields of a supply chain which can be passed to queries as filters.</em></a><li><li><a href="supplychaininput.doc.html" title="SupplyChainInput - Fields of a supply chain which can be passed to mutations.">SupplyChainInput<em>Fields of a supply chain which can be passed to mutations.</em></a><li></ul>
+    </div>
+</section>
+<footer>
+<div class="container slds-p-around--large">
+    <p class="slds-text-align--right slds-text-title--caps">
+        Generated with <a href="https://github.com/2fd/graphdoc#readme" target="_blank">graphdoc 2.4.0</a>
+    </p>
+</div>
+</footer>
+</main>
+    <script src="./scripts/focus-active.js"></script>
+    <script src="./scripts/filter-types.js"></script>
+    <script src="./scripts/toggle-navigation.js"></script>
+</body>
