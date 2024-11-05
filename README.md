@@ -31,11 +31,11 @@ The following use cases can be performed with the AMS.
 ### Indirect Use Cases of AMS
 > [!NOTE]
 > Indirect use of AMS via other MIS components
-1. UC1 **Manual onboarding**
-- Onboarding of manufacturer information via factory connectors.
-- AI-based onboarding of manufacturer information, based on machine specifications.
-2. UC2 **Automatic onboarding / crawling**
-- The manufacturers' production capabilities are automatically read out by querying the factory connectors.
+1. UC1 **Manual capability registration**
+   - Registration of manufacturer capability information via factory connectors.
+   - AI-based extraction of manufacturer capability information, based on machine specifications.
+2. UC2 **Automatic capability registration / crawling**
+   - The manufacturers' production capabilities are automatically read out by querying the factory connectors.
 4. UC4 **Search for potential suppliers/supply chains**
 - Identification of potential suppliers/supply chains for a given production process.
 
@@ -43,9 +43,9 @@ The following use cases can be performed with the AMS.
 
 | Components    | Goals         | URL           |
 | ------------- | ------------- | ------------- |
-| **Supplier Knowledge Base (SKB)** | Knowledge base for manufacturer/supplier information including capabilities, properties, etc. | [MIS-SKB](https://github.com/FraunhoferIOSB/MIS-SKB)  |
+| **Supplier Knowledge Base (SKB)** | Knowledge base for manufacturer/supplier information e.g. capabilities, properties, etc. | [MIS-SKB](https://github.com/FraunhoferIOSB/MIS-SKB)  |
 | **Asset Management and Refinement Application (AMARA)**  | Automatically derives manufacturing capabilities from machine specifications with Large Language Models (LLM)  | [MIS-AMARA](https://github.com/FraunhoferIOSB/MIS-AMARA) |
-| **Asset Management Service (AMS)**  | Interface to manage asset information like enterprise, factories, manufacturing capabilities, etc. within the knowledge base |[MIS-AMS](https://github.com/FraunhoferIOSB/MIS-AMS)  |
+| **Asset Management Service (AMS)**  | Interface to manage asset information like machines, manufacturing capabilities, etc. within the knowledge base |[MIS-AMS](https://github.com/FraunhoferIOSB/MIS-AMS)  |
 | **Search Engine (SE)**  | Provision of manufacturer information such as production capabilities for a given process description  | [MIS-SE](https://github.com/FraunhoferIOSB/MIS-SE)  |
 
 ## Contributing
